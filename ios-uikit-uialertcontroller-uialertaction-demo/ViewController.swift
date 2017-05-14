@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
+
     /// アラート
     let alert = UIAlertController(title: "タイトル",
                                   message: "本文",
@@ -18,13 +18,13 @@ class ViewController: UIViewController {
     let actionSheet = UIAlertController(title: "タイトル",
                                         message: "本文",
                                         preferredStyle: .actionSheet)
-    
+
     /// キャンセルアクション（１つしかセットできない。キャンセル用）
     let cancelAction = UIAlertAction(title: "cancel", style: .cancel) { _ in print("cancel") }
-    
+
     /// デフォルトアクション（複数セット可能。通常のアクションはこちらを選択する）
     let defaultAction = UIAlertAction(title: "default", style: .default) { _ in print("default") }
-    
+
     /// ディストラクティブ（複数セット可能。アクションによってデータに破壊的な変更が発生する可能性あり）
     let destructiveAction = UIAlertAction(title: "destructive", style: .destructive) { _ in print("destructive") }
     
@@ -32,9 +32,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         setup()
     }
-    
+
     // MARK: setup
-    
+
     private func setup() {
         // アラートにアクションをセットする
         alert.addAction(cancelAction)
@@ -45,20 +45,20 @@ class ViewController: UIViewController {
         } else {
             print("iOS9未満です")
         }
-        
+
         // アクションシートにアクションをセットする
-        actionSheet.addAction(cancelAction)
-        actionSheet.addAction(defaultAction)
+        actionSheet.addAction(cancelAction.copy() as! UIAlertAction)
+        actionSheet.addAction(defaultAction.copy() as! UIAlertAction)
         actionSheet.addAction(destructiveAction)
     }
-    
+
     // MARK: ButtonAction
-    
+
     @IBAction func didTapAlet(_ sender: UIButton) {
         // アラートを表示する
         present(alert, animated: true, completion: nil)
     }
-    
+
     @IBAction func didTapActionSheet(_ sender: UIButton) {
         // アクションシートを表示する
         present(actionSheet, animated: true, completion: nil)
